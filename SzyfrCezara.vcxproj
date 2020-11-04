@@ -141,6 +141,9 @@
   <ItemGroup>
     <ClCompile Include="SzyfrCezara.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SzyfrCezara.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
