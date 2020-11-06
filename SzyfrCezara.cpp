@@ -12,11 +12,11 @@ string encrypt(string, int);
 string decrypt(string, int);
 
 // W oryginalnym szyfrze Cezara wynosi 3 znaki, ale nie jest to wymóg.
-static const int SHIFT = 3; 
+static const int SHIFT = 3;
 
 int main()
 {
-	string textToEncrypt = "Tekst do zaszyfrowania.";
+	string textToEncrypt = "Tekst do zaszyfrowania";
 	string encryptedText = encrypt(textToEncrypt, SHIFT);
 	string decryptedText = decrypt(encryptedText, SHIFT);
 
@@ -31,16 +31,13 @@ int main()
 
 	// Cwiczenie nr. 2
 	// Jeżeli wykonałeś ćwiczenie pierwsze, to masz już działającą funkcję deszyfrującą.
-	// Spróbujmy więć złamać kilka zaszyfrowanych informacji.
-	// Poniżej zaszyfrowane są cytaty z życia Juliusza Cezara, użyj funkcji deszyfrującej,
-	// aby je odszyfrować i dowiedzieć się co oznaczają!
-	string encryptedQuote1 = "J uz, Csvuvtjf, qsafdjx nojf?";
-	string encryptedQuote2 = "Cemlolyrz, mbonpmlyrz, mjlpvrmlyrz.";
-	string encryptedQuote3 = "Eimwc timnufs ltowihy";
+	// Twoim zadaniem będzie odkodowanie zaszyfrowanego cytatu z życia Juliusza Cezara.
+	// Każdy uczestnik zajęć otrzyma swój cytat, który bedzie musiał rozszyfrować a następnie zapisać
+	// we wskazanym przez prowadzącego dokumencie.
+	string encryptedQuote = "Tu wklej swoj zaszyfrowany cytat.";
+	int shift = 0;
 
-	printf("%24s\"%s\"\n", "Cytat 1: ", encryptedQuote1.c_str());
-	printf("%24s\"%s\"\n", "Cytat 2: ", encryptedQuote2.c_str());
-	printf("%24s\"%s\"\n", "Cytat 3: ", encryptedQuote3.c_str());
+	printf("%24s\"%s\"\n", "Odszyfrowany cytat: ", decrypt(encryptedQuote, shift).c_str());
 }
 
 string encrypt(string textToEncrypt, int shift) {
@@ -48,19 +45,10 @@ string encrypt(string textToEncrypt, int shift) {
 	for (int i = 0; i < textToEncrypt.length(); i++) {
 		// Sprawdzamy czy znak jest literą.
 		if (isalpha(textToEncrypt[i])) {
-			// Szyfruje duże litery.
-			if (isupper(textToEncrypt[i])) {
-				// Duże litery w tablicy ASCII zaczynają się od indeksu 65. Patrz http://www.asciitable.com/
-				// Alfabet łaciński posiada 26 znaków.
-				encryptedText += char(int(textToEncrypt[i] + shift - 65) % 26 + 65);
-			}
-			// Szyfruje małe litery.
-			else {
-				if (isalpha(textToEncrypt[i])) {
-					// Małe litery w tablicy ASCII zaczynają się od indeksu 97.
-					encryptedText += char(int(textToEncrypt[i] + shift - 97) % 26 + 97);
-				}
-			}
+			// Duże litery w tablicy ASCII zaczynają się od indeksu 65, a małe od 97. 
+			// Patrz http://www.asciitable.com/
+			int asciiIndex = isupper(textToEncrypt[i]) ? 65 : 97;
+			encryptedText += char(int(textToEncrypt[i] + shift - asciiIndex) % 26 + asciiIndex);
 		}
 		// Znak nie jest literą, więc go przepisujemy.
 		else {
